@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina de Hipertrofia · 5 días</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --ink:#0a1628;
+    --steel:#12263f;
+    --blue:#1b4d8f;
+    --blue-bright:#2f7ed8;
+    --cyan:#48c3ff;
+    --line:#1f3a5c;
+    --paper:#0d1b2e;
+    --card:#10233c;
+    --card-hi:#16304f;
+    --text:#dce7f5;
+    --muted:#8ba6c7;
+    --white:#f4f9ff;
+    --warn:#ffb547;
+    --good:#3fd18b;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(47,126,216,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(72,195,255,.10), transparent 55%),
+      var(--ink);
+    color:var(--text);
+    line-height:1.6;
+    padding:0 0 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px;}
+
+  /* HERO */
+  header{
+    position:relative;
+    overflow:hidden;
+    padding:64px 20px 48px;
+    text-align:center;
+    background:
+      linear-gradient(180deg, rgba(27,77,143,.35), transparent),
+      var(--steel);
+    border-bottom:1px solid var(--line);
+  }
+  header::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 38px, rgba(72,195,255,.04) 38px 39px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Barlow Condensed',sans-serif;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    font-weight:600;
+    font-size:.82rem;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem,8vw,4.4rem);
+    line-height:.95;
+    color:var(--white);
+    letter-spacing:.01em;
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--blue-bright);}
+  .sub{
+    margin-top:16px;
+    color:var(--muted);
+    font-size:1.02rem;
+    font-weight:500;
+  }
+  .profile-pills{
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px;
+  }
+  .pill{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    font-size:.82rem;
+    background:var(--card-hi);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:7px 14px;border-radius:100px;
+  }
+  .pill b{color:var(--cyan);}
+
+  /* WEEK STRIP */
+  .week{
+    display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+    margin:34px 0 8px;
+  }
+  .day-chip{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;
+    padding:8px 13px;border-radius:8px;
+    background:var(--card);border:1px solid var(--line);color:var(--muted);
+  }
+  .day-chip.on{
+    background:linear-gradient(180deg,var(--blue),var(--blue-bright));
+    color:var(--white);border-color:transparent;
+    box-shadow:0 4px 14px rgba(47,126,216,.35);
+  }
+  .day-chip.off{opacity:.5;}
+
+  /* SECTION TITLES */
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;
+    margin:52px 0 20px;
+  }
+  .sec-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:2.4rem;line-height:1;
+    color:var(--blue-bright);
+    -webkit-text-stroke:1px var(--blue-bright);
+    color:transparent;
+  }
+  .sec-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:1.9rem;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--white);line-height:1;
+  }
+  .sec-sub{color:var(--muted);font-size:.9rem;margin-top:2px;font-weight:500;}
+
+  /* DAY CARD */
+  .day{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  .day-top{
+    display:flex;align-items:center;gap:14px;
+    padding:18px 22px;
+    background:linear-gradient(90deg, var(--card-hi), transparent);
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+    user-select:none;
+    transition:background .2s;
+  }
+  .day-top:hover{background:linear-gradient(90deg, var(--card-hi), rgba(47,126,216,.06));}
+  .day-chevron{
+    margin-left:auto;
+    flex-shrink:0;
+    width:32px;height:32px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cyan);
+    border:1px solid var(--line);
+    background:var(--card);
+    transition:transform .3s ease;
+    font-size:1rem;
+  }
+  .day-body{
+    display:grid;
+    grid-template-rows:1fr;
+    transition:grid-template-rows .3s ease;
+  }
+  .day-body>div{overflow:hidden;}
+  .day.collapsed .day-top{border-bottom-color:transparent;}
+  .day.collapsed .day-body{grid-template-rows:0fr;}
+  .day.collapsed .day-chevron{transform:rotate(-90deg);}
+  .day-hint{
+    font-size:.72rem;color:var(--muted);font-weight:500;
+    letter-spacing:.03em;margin-top:2px;
+  }
+  /* WARMUP */
+  .warmup{
+    margin:16px 22px 4px;
+    background:rgba(72,195,255,.06);
+    border:1px solid rgba(72,195,255,.22);
+    border-radius:12px;padding:14px 16px;
+  }
+  .warmup-head{
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--cyan);
+  }
+  .warmup-head .t{font-size:.72rem;color:var(--muted);font-weight:600;margin-left:auto;letter-spacing:.02em;}
+  .warmup ol{list-style:none;counter-reset:w;display:grid;gap:6px;}
+  .warmup li{
+    counter-increment:w;position:relative;padding-left:26px;
+    font-size:.86rem;color:var(--text);line-height:1.45;
+  }
+  .warmup li::before{
+    content:counter(w);position:absolute;left:0;top:0;
+    width:18px;height:18px;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.72rem;
+    color:var(--ink);background:var(--cyan);
+  }
+  .warmup li b{color:var(--white);}
+  .day-tag{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:1.1rem;
+    color:var(--white);
+    background:linear-gradient(180deg,var(--blue),var(--blue-bright));
+    width:52px;height:52px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;letter-spacing:.02em;
+    box-shadow:0 4px 12px rgba(47,126,216,.4);
+  }
+  .day-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:1.45rem;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--white);line-height:1.05;
+  }
+  .day-focus{color:var(--cyan);font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+
+  table{width:100%;border-collapse:collapse;}
+  thead th{
+    font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;
+    color:var(--muted);font-weight:600;
+    text-align:left;padding:12px 22px;
+    border-bottom:1px solid var(--line);
+  }
+  thead th.c{text-align:center;}
+  tbody td{padding:13px 22px;border-bottom:1px solid rgba(31,58,92,.5);font-size:.95rem;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:rgba(47,126,216,.06);}
+  .ex{color:var(--white);font-weight:500;}
+  .sets{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1.05rem;color:var(--cyan);white-space:nowrap;}
+  .rir{text-align:center;}
+  .rir b{
+    display:inline-block;min-width:44px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;
+    padding:3px 8px;border-radius:6px;font-size:.9rem;
+    background:var(--card-hi);border:1px solid var(--line);color:var(--text);
+  }
+  .tag-post{
+    font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--cyan);background:rgba(72,195,255,.12);
+    padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle;
+  }
+
+  /* RIR BOX */
+  .rir-box{
+    background:linear-gradient(160deg,var(--card-hi),var(--card));
+    border:1px solid var(--blue);
+    border-radius:16px;padding:28px;margin-bottom:20px;
+    position:relative;overflow:hidden;
+  }
+  .rir-box::after{
+    content:"RIR";
+    position:absolute;right:-8px;bottom:-28px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:8rem;color:rgba(47,126,216,.08);letter-spacing:-.02em;
+  }
+  .rir-title{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:1.4rem;text-transform:uppercase;color:var(--white);margin-bottom:6px;
+  }
+  .rir-def{color:var(--muted);margin-bottom:20px;max-width:60ch;}
+  .rir-scale{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+  .rir-item{
+    flex:1;min-width:150px;
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;
+  }
+  .rir-item .n{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.6rem;
+    color:var(--blue-bright);line-height:1;margin-bottom:6px;
+  }
+  .rir-item .d{font-size:.88rem;color:var(--text);}
+  .rir-note{
+    margin-top:18px;font-size:.9rem;color:var(--muted);
+    padding-top:16px;border-top:1px solid var(--line);position:relative;z-index:1;
+  }
+  .rir-note b{color:var(--cyan);}
+
+  /* RULES */
+  .rules{display:grid;gap:14px;}
+  .rule{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;
+  }
+  .rule-ico{
+    flex-shrink:0;width:42px;height:42px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;
+    background:linear-gradient(180deg,var(--blue),var(--blue-bright));
+  }
+  .rule h4{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;
+    text-transform:uppercase;letter-spacing:.02em;color:var(--white);margin-bottom:3px;
+  }
+  .rule p{font-size:.92rem;color:var(--muted);}
+  .rule p b{color:var(--text);}
+
+  /* TIPS */
+  .tip{
+    display:flex;gap:14px;align-items:flex-start;
+    border-left:3px solid var(--warn);
+    background:rgba(255,181,71,.06);
+    border-radius:0 12px 12px 0;
+    padding:16px 18px;margin-bottom:12px;
+  }
+  .tip.good{border-left-color:var(--good);background:rgba(63,209,139,.06);}
+  .tip.blue{border-left-color:var(--blue-bright);background:rgba(47,126,216,.07);}
+  .tip-ico{font-size:1.2rem;flex-shrink:0;line-height:1.4;}
+  .tip p{font-size:.92rem;color:var(--text);}
+  .tip p b{color:var(--white);}
+
+  /* DELTOID GRID */
+  .delt{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .delt-c{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;
+    text-align:center;
+  }
+  .delt-c .h{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;
+    color:var(--blue-bright);font-size:1.05rem;margin-bottom:6px;letter-spacing:.03em;
+  }
+  .delt-c .b{font-size:.82rem;color:var(--muted);}
+  .delt-c .freq{
+    display:inline-block;margin-top:8px;font-family:'Barlow Condensed',sans-serif;
+    font-weight:600;font-size:.78rem;color:var(--cyan);
+    background:rgba(72,195,255,.1);padding:2px 9px;border-radius:100px;letter-spacing:.05em;
+  }
+
+  footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);}
+
+  /* LOG */
+  .log-day{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;margin-bottom:16px;
+  }
+  .log-day-head{
+    display:flex;align-items:center;gap:10px;
+    padding:14px 18px;background:linear-gradient(90deg,var(--card-hi),transparent);
+    border-bottom:1px solid var(--line);
+    cursor:pointer;user-select:none;transition:background .2s;
+  }
+  .log-day-head:hover{background:linear-gradient(90deg,var(--card-hi),rgba(47,126,216,.06));}
+  .log-chevron{
+    margin-left:auto;flex-shrink:0;width:28px;height:28px;border-radius:7px;
+    display:flex;align-items:center;justify-content:center;color:var(--cyan);
+    border:1px solid var(--line);background:var(--card);
+    transition:transform .3s ease;font-size:.85rem;
+  }
+  .log-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease;}
+  .log-body>div{overflow:hidden;}
+  .log-day.collapsed .log-day-head{border-bottom-color:transparent;}
+  .log-day.collapsed .log-body{grid-template-rows:0fr;}
+  .log-day.collapsed .log-chevron{transform:rotate(-90deg);}
+  .log-badge{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;
+    color:var(--white);background:linear-gradient(180deg,var(--blue),var(--blue-bright));
+    width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .log-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;text-transform:uppercase;color:var(--white);letter-spacing:.02em;}
+  .log-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table.log{width:100%;border-collapse:collapse;min-width:520px;}
+  table.log th{
+    font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em;
+    font-size:.72rem;color:var(--muted);font-weight:600;padding:10px 8px;
+    border-bottom:1px solid var(--line);text-align:center;white-space:nowrap;
+  }
+  table.log th.ex-col{text-align:left;padding-left:18px;min-width:150px;position:sticky;left:0;background:var(--card);}
+  table.log td{padding:6px 6px;border-bottom:1px solid rgba(31,58,92,.5);}
+  table.log td.ex-col{
+    font-size:.86rem;color:var(--white);padding-left:18px;
+    position:sticky;left:0;background:var(--card);white-space:nowrap;
+  }
+  table.log tr:last-child td{border-bottom:none;}
+  table.log input{
+    width:56px;text-align:center;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;
+    color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.9rem;
+    padding:6px 4px;outline:none;transition:border-color .15s;
+  }
+  table.log input::placeholder{color:#3a5578;font-weight:500;}
+  table.log input:focus{border-color:var(--blue-bright);background:var(--steel);}
+  table.log input:not(:placeholder-shown){background:rgba(47,126,216,.1);border-color:var(--blue);}
+  .log-actions{display:flex;gap:10px;justify-content:flex-end;margin:18px 0 8px;flex-wrap:wrap;}
+  .log-btn{
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    font-size:.82rem;cursor:pointer;padding:9px 18px;border-radius:100px;transition:all .2s;
+    background:var(--card-hi);border:1px solid var(--line);color:var(--text);
+  }
+  .log-btn:hover{border-color:var(--blue-bright);color:var(--white);}
+  .log-btn.clear:hover{border-color:var(--warn);color:var(--warn);}
+  .log-hint{font-size:.86rem;color:var(--muted);margin-bottom:18px;}
+  .log-hint b{color:var(--cyan);}
+  .saved-flag{
+    font-size:.78rem;color:var(--good);font-weight:600;
+    opacity:0;transition:opacity .3s;align-self:center;margin-right:auto;
+  }
+  .saved-flag.show{opacity:1;}
+
+  /* SAFARI GUIDE */
+  .safari-box{
+    background:linear-gradient(160deg,var(--card-hi),var(--card));
+    border:1px solid var(--blue);border-radius:16px;
+    padding:24px;margin:0 0 20px;
+  }
+  .safari-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:16px;
+  }
+  .safari-head .ic{
+    width:34px;height:34px;border-radius:9px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+    background:linear-gradient(180deg,var(--blue),var(--blue-bright));
+  }
+  .safari-head h4{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em;color:var(--white);
+  }
+  .safari-steps{list-style:none;counter-reset:s;display:grid;gap:12px;}
+  .safari-steps li{
+    counter-increment:s;position:relative;padding-left:38px;
+    font-size:.92rem;color:var(--text);
+  }
+  .safari-steps li::before{
+    content:counter(s);position:absolute;left:0;top:-1px;
+    width:26px;height:26px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;
+    color:var(--white);background:var(--blue);
+  }
+  .safari-steps li b{color:var(--white);}
+  .safari-steps li .key{color:var(--cyan);font-weight:600;}
+  .safari-warn{
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    display:grid;gap:8px;
+  }
+  .safari-warn .w{
+    font-size:.86rem;color:var(--muted);display:flex;gap:8px;align-items:flex-start;
+  }
+  .safari-warn .w .dot{color:var(--warn);flex-shrink:0;}
+  .safari-warn .w.ok .dot{color:var(--good);}
+  .safari-warn .w b{color:var(--text);}
+
+  @media(max-width:560px){
+    .delt{grid-template-columns:1fr;}
+    thead th:nth-child(1),tbody td:nth-child(1){padding-left:16px;}
+    .rir-item{min-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Plan de entrenamiento · basado en ciencia</div>
+  <h1>Rutina de <span>Hipertrofia</span></h1>
+  <div class="sub">5 días · enfoque en crecimiento muscular</div>
+  <div class="profile-pills">
+    <span class="pill">Hombre · <b>19 años</b></span>
+    <span class="pill">Meta: <b>ganar masa</b></span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="week">
+    <span class="day-chip on">Lun · Legs</span>
+    <span class="day-chip on">Mar · Push</span>
+    <span class="day-chip on">Mié · Pull</span>
+    <span class="day-chip on">Jue · Upper</span>
+    <span class="day-chip on">Vie · Lower</span>
+    <span class="day-chip off">Sáb · Rest</span>
+    <span class="day-chip off">Dom · Rest</span>
+  </div>
+
+  <!-- ROUTINE -->
+  <div class="sec-head">
+    <div class="sec-num">01</div>
+    <div>
+      <div class="sec-title">El Entrenamiento</div>
+      <div class="sec-sub">Lun–Vie de corrido, descanso el finde · piernas separadas al máximo (Lun y Vie)</div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+    <button id="toggleAll" onclick="toggleAll()" style="
+      font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.05em;
+      text-transform:uppercase;font-size:.82rem;cursor:pointer;
+      background:var(--card-hi);border:1px solid var(--line);color:var(--cyan);
+      padding:8px 16px;border-radius:100px;transition:all .2s;">
+      Expandir todo
+    </button>
+  </div>
+
+  <!-- DAY 1: LEGS -->
+  <div class="day">
+    <div class="day-top" onclick="toggleDay(this)">
+      <div class="day-tag">D1</div>
+      <div>
+        <div class="day-name">Legs</div>
+        <div class="day-focus">Isométrico · protege rodilla · Lunes</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div>
+    <div class="warmup">
+      <div class="warmup-head">🔥 Calentamiento <span class="t">10–15 min</span></div>
+      <ol>
+        <li><b>Cardio suave 5 min:</b> bici estática o elíptica (bajo impacto, amables con la rodilla).</li>
+        <li><b>Movilidad de cadera y tobillo 3 min:</b> círculos de cadera, balanceos de pierna suaves, círculos de tobillo.</li>
+        <li><b>Rodilla sin carga 2 min:</b> sentadillas al aire lentas y de rango corto, solo hasta donde no moleste — prepara la articulación.</li>
+        <li><b>Aproximación:</b> 1–2 series muy ligeras del primer ejercicio antes de empezar en serio.</li>
+      </ol>
+    </div>
+    <table>
+      <thead><tr><th>Ejercicio</th><th class="c">Series × Tiempo/Reps</th><th class="c">Intensidad</th></tr></thead>
+      <tbody>
+        <tr><td class="ex">Sentadilla isométrica en pared (wall sit)</td><td class="sets">4 × 30–45s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Peso muerto rumano (ligero-moderado)</td><td class="sets">4 × 10–12</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Prensa isométrica (pausa, rango corto) <span class="tag-post" style="color:var(--good);background:rgba(63,209,139,.12)">Pies ↖↗</span></td><td class="sets">3 × 20–30s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Hip thrust isométrico (sostener arriba)</td><td class="sets">4 × 20–30s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Extensión de cuádriceps isométrica</td><td class="sets">3 × 20–30s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Elevación de pantorrillas sostenida</td><td class="sets">4 × 20–30s</td><td class="rir"><b>Fuerte</b></td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </div>
+
+  <!-- DAY 2: PUSH -->
+  <div class="day">
+    <div class="day-top" onclick="toggleDay(this)">
+      <div class="day-tag">D2</div>
+      <div>
+        <div class="day-name">Push</div>
+        <div class="day-focus">Pecho · Hombro · Tríceps · Martes</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div>
+    <div class="warmup">
+      <div class="warmup-head">🔥 Calentamiento <span class="t">10–15 min</span></div>
+      <ol>
+        <li><b>Cardio suave 3–5 min:</b> caminadora, elíptica o remo para subir pulsaciones.</li>
+        <li><b>Movilidad de hombro 3 min:</b> círculos de brazos, dislocaciones con banda, rotaciones de hombro.</li>
+        <li><b>Activación 2 min:</b> band pull-aparts o face pulls ligeros para despertar la espalda alta y el hombro.</li>
+        <li><b>Aproximación:</b> 1–2 series ligeras del primer press/jalón antes de las series reales.</li>
+      </ol>
+    </div>
+    <table>
+      <thead><tr><th>Ejercicio</th><th class="c">Series × Reps</th><th class="c">RIR</th></tr></thead>
+      <tbody>
+        <tr><td class="ex">Press banca con barra</td><td class="sets">4 × 6–8</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Press inclinado con mancuernas</td><td class="sets">4 × 8–10</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Press militar con mancuernas</td><td class="sets">3 × 8–10</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Aperturas en polea o pec-deck</td><td class="sets">3 × 12–15</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Elevaciones laterales</td><td class="sets">4 × 12–20</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Pec-deck al revés <span class="tag-post">Post.</span></td><td class="sets">3 × 15–20</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Extensión tríceps en polea (cuerda)</td><td class="sets">3 × 10–12</td><td class="rir"><b>1</b></td></tr>
+        <tr><td class="ex">Extensión tríceps sobre cabeza</td><td class="sets">3 × 12–15</td><td class="rir"><b>0–1</b></td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </div>
+
+  <!-- DAY 3: PULL -->
+  <div class="day">
+    <div class="day-top" onclick="toggleDay(this)">
+      <div class="day-tag">D3</div>
+      <div>
+        <div class="day-name">Pull</div>
+        <div class="day-focus">Espalda · Bíceps · Miércoles</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div>
+    <div class="warmup">
+      <div class="warmup-head">🔥 Calentamiento <span class="t">10–15 min</span></div>
+      <ol>
+        <li><b>Cardio suave 3–5 min:</b> caminadora, elíptica o remo para subir pulsaciones.</li>
+        <li><b>Movilidad de hombro 3 min:</b> círculos de brazos, dislocaciones con banda, rotaciones de hombro.</li>
+        <li><b>Activación 2 min:</b> band pull-aparts o face pulls ligeros para despertar la espalda alta y el hombro.</li>
+        <li><b>Aproximación:</b> 1–2 series ligeras del primer press/jalón antes de las series reales.</li>
+      </ol>
+    </div>
+    <table>
+      <thead><tr><th>Ejercicio</th><th class="c">Series × Reps</th><th class="c">RIR</th></tr></thead>
+      <tbody>
+        <tr><td class="ex">Jalón al pecho en polea</td><td class="sets">4 × 8–10</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Remo con apoyo de pecho (máquina)</td><td class="sets">4 × 8–10</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Remo en T (T-bar)</td><td class="sets">3 × 10–12</td><td class="rir"><b>1</b></td></tr>
+        <tr><td class="ex">Pull-over en polea o máquina</td><td class="sets">3 × 12–15</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Face pull <span class="tag-post">Post.</span></td><td class="sets">3 × 15–20</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Curl en polea baja <span class="tag-post" style="color:var(--warn);background:rgba(255,181,71,.12)">Rotar</span></td><td class="sets">3 × 10–12</td><td class="rir"><b>1</b></td></tr>
+        <tr><td class="ex">Curl inclinado con mancuernas</td><td class="sets">3 × 10–12</td><td class="rir"><b>0–1</b></td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </div>
+
+  <!-- DAY 4: UPPER -->
+  <div class="day">
+    <div class="day-top" onclick="toggleDay(this)">
+      <div class="day-tag">D4</div>
+      <div>
+        <div class="day-name">Upper</div>
+        <div class="day-focus">Torso · mayormente en Smith · Jueves</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div>
+    <div class="warmup">
+      <div class="warmup-head">🔥 Calentamiento <span class="t">10–15 min</span></div>
+      <ol>
+        <li><b>Cardio suave 3–5 min:</b> caminadora, elíptica o remo para subir pulsaciones.</li>
+        <li><b>Movilidad de hombro 3 min:</b> círculos de brazos, dislocaciones con banda, rotaciones de hombro.</li>
+        <li><b>Activación 2 min:</b> band pull-aparts o face pulls ligeros para despertar la espalda alta y el hombro.</li>
+        <li><b>Aproximación:</b> 1–2 series ligeras del primer press/jalón antes de las series reales.</li>
+      </ol>
+    </div>
+    <table>
+      <thead><tr><th>Ejercicio</th><th class="c">Series × Reps</th><th class="c">RIR</th></tr></thead>
+      <tbody>
+        <tr><td class="ex">Press inclinado en Smith</td><td class="sets">4 × 6–8</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Dominada asistida (máquina)</td><td class="sets">4 × 8–12</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Remo en polea a una mano</td><td class="sets">3 × 10–12</td><td class="rir"><b>1</b></td></tr>
+        <tr><td class="ex">Press militar en Smith</td><td class="sets">3 × 8–10</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Elevaciones laterales</td><td class="sets">4 × 12–20</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Curl martillo</td><td class="sets">3 × 10–12</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Press cerrado en Smith</td><td class="sets">3 × 8–10</td><td class="rir"><b>1</b></td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </div>
+
+  <!-- DAY 5: LOWER -->
+  <div class="day">
+    <div class="day-top" onclick="toggleDay(this)">
+      <div class="day-tag">D5</div>
+      <div>
+        <div class="day-name">Lower + Core</div>
+        <div class="day-focus">Isométrico · protege rodilla · Viernes</div>
+      </div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div>
+    <div class="warmup">
+      <div class="warmup-head">🔥 Calentamiento <span class="t">10–15 min</span></div>
+      <ol>
+        <li><b>Cardio suave 5 min:</b> bici estática o elíptica (bajo impacto, amables con la rodilla).</li>
+        <li><b>Movilidad de cadera y tobillo 3 min:</b> círculos de cadera, balanceos de pierna suaves, círculos de tobillo.</li>
+        <li><b>Rodilla sin carga 2 min:</b> sentadillas al aire lentas y de rango corto, solo hasta donde no moleste — prepara la articulación.</li>
+        <li><b>Aproximación:</b> 1–2 series muy ligeras del primer ejercicio antes de empezar en serio.</li>
+      </ol>
+    </div>
+    <table>
+      <thead><tr><th>Ejercicio</th><th class="c">Series × Tiempo/Reps</th><th class="c">Intensidad</th></tr></thead>
+      <tbody>
+        <tr><td class="ex">Peso muerto rumano o convencional (ligero)</td><td class="sets">4 × 10–12</td><td class="rir"><b>1–2</b></td></tr>
+        <tr><td class="ex">Puente de glúteo isométrico</td><td class="sets">4 × 30–45s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Sentadilla isométrica en pared (wall sit)</td><td class="sets">3 × 30–45s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Patada de glúteo en máquina</td><td class="sets">4 × 12–15</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Elevación de pantorrillas sostenida</td><td class="sets">4 × 20–30s</td><td class="rir"><b>Fuerte</b></td></tr>
+        <tr><td class="ex">Crunch en polea o máquina</td><td class="sets">4 × 12–15</td><td class="rir"><b>0–1</b></td></tr>
+        <tr><td class="ex">Plancha</td><td class="sets">3 × 40–60s</td><td class="rir"><b>Fuerte</b></td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </div>
+
+  <div class="safari-box" style="margin-top:24px;">
+    <div class="safari-head">
+      <div class="ic" style="background:linear-gradient(180deg,#c98a2a,#e0a63a)">🦵</div>
+      <h4>Días de pierna · Enfoque isométrico</h4>
+    </div>
+    <p style="color:var(--text);font-size:.92rem;margin-bottom:14px;">Por indicación médica (molestia de rodilla), los días de pierna se adaptaron a <b style="color:var(--white)">ejercicios isométricos y de bajo impacto</b>: se sostiene una posición sin mover la rodilla bajo carga, lo que fortalece sin desgastar la articulación.</p>
+    <div class="safari-warn" style="border-top:none;padding-top:0;">
+      <div class="w ok"><span class="dot">✓</span><span>En los <b>isométricos</b> (marcados con tiempo en segundos), aguanta la posición con tensión fuerte pero <b>sin dolor</b>. Respira normal, no aguantes la respiración.</span></div>
+      <div class="w ok"><span class="dot">✓</span><span>Si un ejercicio molesta la rodilla, <b>reduce el rango</b> (ej. wall sit menos profundo) o para. La molestia manda, no el número.</span></div>
+      <div class="w"><span class="dot">✕</span><span>Se quitaron los <b>saltos, sentadilla pesada, búlgara y prensa profunda</b> — son los que más cargan la rodilla.</span></div>
+    </div>
+    <p style="color:var(--muted);font-size:.86rem;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);"><b style="color:var(--warn)">Importante:</b> esta adaptación es general. Muéstrasela a tu doctor o fisioterapeuta para confirmar que estos ejercicios son adecuados para tu caso antes de empezar. Cada rodilla es distinta.</p>
+  </div>
+
+  <!-- RIR -->
+  <div class="sec-head">
+    <div class="sec-num">02</div>
+    <div>
+      <div class="sec-title">¿Qué es el RIR?</div>
+      <div class="sec-sub">La medida que controla cuánto esfuerzo meterle a cada serie</div>
+    </div>
+  </div>
+
+  <div class="rir-box">
+    <div class="rir-title">Reps In Reserve</div>
+    <p class="rir-def">Cuántas repeticiones <b style="color:var(--white)">más</b> podrías hacer al terminar una serie antes de llegar al fallo (no poder hacer ni una más con buena técnica). Es la forma de medir la intensidad con un número concreto en vez de un vago "entrena duro".</p>
+    <div class="rir-scale">
+      <div class="rir-item"><div class="n">RIR 2</div><div class="d">Terminas y aún podrías hacer 2 reps más. Paras ahí.</div></div>
+      <div class="rir-item"><div class="n">RIR 1</div><div class="d">Podrías hacer 1 repetición más. Casi al límite.</div></div>
+      <div class="rir-item"><div class="n">RIR 0</div><div class="d">Fallo total. No te queda ninguna. Diste todo.</div></div>
+    </div>
+    <div class="rir-note">
+      <b>Básicos pesados</b> (banca, sentadilla, peso muerto) → RIR 1–2: dejas margen por seguridad técnica y para no fatigarte de más.<br>
+      <b>Aislamientos</b> (laterales, curls, extensiones) → RIR 0–1: son seguros de llevar al límite y ahí el fallo suma estímulo sin tanto costo.
+    </div>
+  </div>
+
+  <div class="tip blue">
+    <span class="tip-ico">🎯</span>
+    <p><b>Truco para calibrarlo:</b> durante la serie, cuando las reps se pongan difíciles y la barra suba más lento, pregúntate "¿cuántas más podría hacer?". Al principio uno sobrestima cuánto le queda (crees que tienes RIR 2 y en realidad es RIR 4); con unas semanas de práctica se afina. De vez en cuando lleva un aislamiento al fallo real para aprender qué se siente el RIR 0.</p>
+  </div>
+
+  <!-- DELTOID -->
+  <div class="sec-head">
+    <div class="sec-num">03</div>
+    <div>
+      <div class="sec-title">El Hombro, por porciones</div>
+      <div class="sec-sub">El deltoide lateral es lo que más ensancha visualmente</div>
+    </div>
+  </div>
+
+  <div class="delt">
+    <div class="delt-c">
+      <div class="h">Anterior</div>
+      <div class="b">Cubierto por todos los presses. No necesita aislamiento extra.</div>
+      <span class="freq">Días 1 · 4</span>
+    </div>
+    <div class="delt-c">
+      <div class="h">Lateral</div>
+      <div class="b">Elevaciones laterales. Es el que da anchura y prioridad visual.</div>
+      <span class="freq">2× semana</span>
+    </div>
+    <div class="delt-c">
+      <div class="h">Posterior</div>
+      <div class="b">Pec-deck al revés + face pull. Dos mecánicas distintas.</div>
+      <span class="freq">2× semana</span>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="sec-head">
+    <div class="sec-num">04</div>
+    <div>
+      <div class="sec-title">Reglas · No Negociables</div>
+      <div class="sec-sub">La rutina es solo el 30%. Esto es lo que decide si crece o no</div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <div class="rule">
+      <div class="rule-ico">🍽️</div>
+      <div>
+        <h4>Superávit calórico</h4>
+        <p>Comer <b>~300–500 kcal por encima de mantenimiento</b>. Si la báscula no sube ~0.25–0.5 kg por semana, come más. Es el error #1: no comer suficiente para crecer.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico">🥩</div>
+      <div>
+        <h4>Proteína</h4>
+        <p><b>1.6–2.2 g por kg de peso corporal</b> al día, repartida en 3–5 comidas. Es el material con el que se construye el músculo.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico">📈</div>
+      <div>
+        <h4>Sobrecarga progresiva</h4>
+        <p>Cada semana intenta <b>añadir peso o 1 repetición</b> en los básicos. Lleva registro. Sin esto, ninguna rutina funciona.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico">⏱️</div>
+      <div>
+        <h4>Descanso entre series</h4>
+        <p><b>2–3 min</b> en básicos pesados, <b>60–90 s</b> en aislamientos. No tengas prisa en lo pesado.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico">😴</div>
+      <div>
+        <h4>Sueño</h4>
+        <p><b>7–9 horas.</b> A los 19 años el crecimiento y la recuperación dependen muchísimo de esto. El músculo crece descansando, no en el gym.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="sec-head">
+    <div class="sec-num">05</div>
+    <div>
+      <div class="sec-title">Tips · A Tener en Cuenta</div>
+      <div class="sec-sub">Detalles de ejecución que marcan la diferencia</div>
+    </div>
+  </div>
+
+  <div class="tip good">
+    <span class="tip-ico">🧱</span>
+    <p><b>Sentadilla en pared (wall sit):</b> espalda pegada a la pared, baja hasta que los muslos queden lo más cerca de 90° <b>sin que la rodilla moleste</b> (si duele, baja menos). Aguanta la posición el tiempo indicado, respirando normal. Es el ejercicio isométrico clave para fortalecer el cuádriceps protegiendo la rodilla.</p>
+  </div>
+  <div class="tip good">
+    <span class="tip-ico">🍑</span>
+    <p><b>Hip thrust isométrico:</b> espalda apoyada en un banco, empuja la cadera arriba hasta que el torso quede recto y <b>aprieta fuerte el glúteo sosteniendo arriba</b> el tiempo indicado. La rodilla queda fija, así que trabajas glúteo e isquios sin que la rodilla flexione bajo carga. Sustituye al curl femoral, que sí molestaba la rodilla.</p>
+  </div>
+  <div class="tip good">
+    <span class="tip-ico">🦶</span>
+    <p><b>Prensa · posición de pies (indicación médica):</b> coloca los pies con las <b>puntas levemente hacia afuera</b>, no rectas al frente. Lo más importante: deja que <b>las rodillas sigan la línea de los pies</b> (que apunten en la misma dirección que los dedos, sin colapsar hacia adentro). Esto alinea mejor la rodilla y reparte la carga de forma más pareja.</p>
+  </div>
+  <div class="tip good">
+    <span class="tip-ico">✅</span>
+    <p><b>Face pull y pec-deck al revés:</b> peso ligero-moderado y control total. La técnica manda sobre el peso. En el face pull lleva la cuerda hacia la frente/ojos con los codos altos; si cargas mucho, deja de trabajar el hombro posterior.</p>
+  </div>
+  <div class="tip">
+    <span class="tip-ico">⚙️</span>
+    <p><b>Máquina Smith (Día 4):</b> al ser guiada trabaja menos los estabilizadores, pero permite ir pesado con seguridad sin compañero — perfectamente válida para hipertrofia. En el press militar, siéntate para que la barra baje frente a la barbilla, no pegada al cuello.</p>
+  </div>
+  <div class="tip">
+    <span class="tip-ico">🦵</span>
+    <p><b>Dominada asistida:</b> apoya las rodillas o los pies en la plataforma acolchada de la máquina — el peso que pongas es la <b>ayuda</b> que te da (más peso = más fácil). Baja controlado y sube llevando el pecho hacia la barra. A medida que ganes fuerza, <b>reduce la asistencia</b> poco a poco hasta llegar a hacer dominadas libres. Es el camino directo a tu primera dominada.</p>
+  </div>
+  <div class="tip blue">
+    <span class="tip-ico">🎣</span>
+    <p><b>Remo en T:</b> es la barra con discos en la punta (o plataforma con apoyo de pecho) que jalas con agarre en V — <b>no</b> es el remo en máquina de sentarse y jalar los agarres. Espalda recta, jala llevando los codos hacia atrás y aprieta los omóplatos arriba. Grosor de espalda media.</p>
+  </div>
+  <div class="tip">
+    <span class="tip-ico">🏋️</span>
+    <p><b>Remo con apoyo de pecho:</b> recuéstate boca abajo contra el cojín inclinado y jala llevando los codos hacia atrás, apretando los omóplatos. Como el pecho queda apoyado, <b>la espalda baja no carga nada</b> — ideal para entrenar la espalda con seguridad. Deja que los brazos se estiren abajo para un buen rango.</p>
+  </div>
+  <div class="tip good">
+    <span class="tip-ico">🎯</span>
+    <p><b>Meta a mediano plazo:</b> llegar a hacer dominadas libres — de los mejores ejercicios para construir una espalda ancha. El remo invertido y las negativas son el camino para llegar ahí.</p>
+  </div>
+  <div class="tip blue">
+    <span class="tip-ico">🔄</span>
+    <p><b>Rotación de bíceps (Día 3):</b> el curl marcado con <b style="color:var(--warn)">Rotar</b> cámbialo cada 4–6 semanas para no estancarte, manteniendo 3 × 10–12. Ciclo sugerido: <b>1)</b> Curl en polea baja → <b>2)</b> Curl mancuernas alterno → <b>3)</b> Curl concentrado → <b>4)</b> Curl en máquina. Todos sin barra. Cada uno pega al bíceps desde un ángulo distinto y evita que se acostumbre.</p>
+  </div>
+
+  <!-- PROGRESSION -->
+  <div class="sec-head">
+    <div class="sec-num">06</div>
+    <div>
+      <div class="sec-title">Cómo Progresar</div>
+      <div class="sec-sub">La memoria muscular recupera gran parte del músculo en 4–8 semanas</div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <div class="rule">
+      <div class="rule-ico" style="background:linear-gradient(180deg,#2a4a7a,#3a6db0)">1–2</div>
+      <div>
+        <h4>Semanas 1–2</h4>
+        <p>RIR 2–3, peso moderado. Domina la técnica de cada ejercicio antes de cargar fuerte.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico" style="background:linear-gradient(180deg,#1b4d8f,#2f7ed8)">3–4</div>
+      <div>
+        <h4>Semanas 3–4</h4>
+        <p>RIR 1–2, empieza a subir cargas. El cuerpo ya se adaptó al movimiento.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-ico" style="background:linear-gradient(180deg,#0f8de0,#48c3ff)">5+</div>
+      <div>
+        <h4>Semana 5 en adelante</h4>
+        <p>Progresión normal: sobrecarga progresiva constante, añadiendo peso o reps cada semana.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div class="sec-head">
+    <div class="sec-num">07</div>
+    <div>
+      <div class="sec-title">Registro de Progreso</div>
+      <div class="sec-sub">Aquí es donde se decide todo — supera la semana anterior</div>
+    </div>
+  </div>
+
+  <p class="log-hint">
+    En cada casilla anota el <b>peso × reps</b> de tu mejor serie (ej. <b>40×8</b>). La meta cada semana es superar la anterior, aunque sea 1 rep o 1 kg — eso es la <b>sobrecarga progresiva</b>. <b style="color:var(--good)">Todo se guarda solo en este dispositivo</b>, aunque cierres y vuelvas a abrir.
+  </p>
+
+  <div class="safari-box">
+    <div class="safari-head">
+      <div class="ic">📱</div>
+      <h4>Cómo usarlo en el iPhone</h4>
+    </div>
+    <ol class="safari-steps">
+      <li>Abre el <b>link de la rutina</b> en <b>Safari</b> desde tu iPhone.</li>
+      <li>Toca el botón <b>Compartir</b> (el cuadro con la flecha ↑) y elige <span class="key">Añadir a pantalla de inicio</span>.</li>
+      <li>Abre la rutina <b>siempre desde ese ícono</b>. Tus pesos se guardan solos al escribirlos, aunque cierres y vuelvas otro día.</li>
+      <li>Cada mes toca <span class="key">Exportar respaldo</span> y guarda el archivo o mándatelo por WhatsApp. Es tu copia de seguridad.</li>
+    </ol>
+    <div class="safari-warn">
+      <div class="w ok"><span class="dot">✓</span><span>Ábrelo desde el mismo ícono cada vez y tus datos siempre estarán ahí.</span></div>
+      <div class="w"><span class="dot">✕</span><span><b>No uses pestañas privadas</b> — Safari borra todo al cerrarlas.</span></div>
+      <div class="w"><span class="dot">✕</span><span>No uses <b>"Borrar historial y datos de sitios web"</b> en ajustes de Safari, o se borra el registro (por eso existe el respaldo).</span></div>
+    </div>
+  </div>
+
+  <div id="logContainer"></div>
+
+  <div class="log-actions">
+    <span class="saved-flag" id="savedFlag">✓ Guardado</span>
+    <button class="log-btn" onclick="exportLog()">⬇ Exportar respaldo</button>
+    <button class="log-btn clear" onclick="clearLog()">Borrar todo</button>
+  </div>
+
+  <p class="log-hint" style="margin-top:20px;">
+    <b>Peso corporal:</b> anótalo 1× por semana (mismo día, en ayunas). Si en 2–3 semanas no sube, es señal de comer más — es el mejor indicador de si el superávit funciona.
+  </p>
+  <div class="log-day" id="bwCard" style="cursor:default;">
+    <div class="log-day-head" style="cursor:default;"><div class="log-badge" style="background:linear-gradient(180deg,#2a4a7a,#3a6db0)">⚖</div><div class="log-name">Peso corporal</div></div>
+    <div class="log-scroll">
+      <table class="log">
+        <thead><tr><th class="ex-col">Semana</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th></tr></thead>
+        <tbody>
+          <tr><td class="ex-col">Peso (kg)</td>
+            <td><input data-k="bw1" placeholder="—"></td>
+            <td><input data-k="bw2" placeholder="—"></td>
+            <td><input data-k="bw3" placeholder="—"></td>
+            <td><input data-k="bw4" placeholder="—"></td>
+            <td><input data-k="bw5" placeholder="—"></td>
+            <td><input data-k="bw6" placeholder="—"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Rutina basada en ciencia · 5 días · Hipertrofia<br>
+    Registra cada sesión (peso × reps) y supera la semana anterior. Ahí está el secreto.
+  </footer>
+
+</div>
+
+<script>
+  // Todos los días arrancan colapsados excepto el primero
+  document.querySelectorAll('.day').forEach(function(day, i){
+    day.classList.add('collapsed');
+  });
+
+  function toggleDay(topEl){
+    topEl.closest('.day').classList.toggle('collapsed');
+    syncButton();
+  }
+
+  function toggleAll(){
+    var days = document.querySelectorAll('.day');
+    var anyOpen = [].some.call(days, function(d){ return !d.classList.contains('collapsed'); });
+    days.forEach(function(d){
+      if(anyOpen) d.classList.add('collapsed');
+      else d.classList.remove('collapsed');
+    });
+    syncButton();
+  }
+
+  function syncButton(){
+    var days = document.querySelectorAll('.day');
+    var anyOpen = [].some.call(days, function(d){ return !d.classList.contains('collapsed'); });
+    document.getElementById('toggleAll').textContent = anyOpen ? 'Colapsar todo' : 'Expandir todo';
+  }
+
+  syncButton();
+
+  // ---- REGISTRO DE PROGRESO ----
+  var logData = {
+    "D1 · Legs": ["Wall sit (seg)","Peso muerto rumano","Prensa isométrica (seg)","Hip thrust isom. (seg)","Extensión cuádriceps isom. (seg)","Pantorrilla sostenida (seg)"],
+    "D2 · Push": ["Press banca barra","Press inclinado mancuernas","Press militar mancuernas","Aperturas polea/pec-deck","Elevaciones laterales","Pec-deck al revés","Extensión tríceps cuerda","Extensión tríceps sobre cabeza"],
+    "D3 · Pull": ["Jalón al pecho","Remo apoyo de pecho","Remo en T (T-bar)","Pull-over polea/máquina","Face pull","Curl polea (rotar)","Curl inclinado mancuernas"],
+    "D4 · Upper": ["Press inclinado Smith","Dominada asistida","Remo polea 1 mano","Press militar Smith","Elevaciones laterales","Curl martillo","Press cerrado Smith"],
+    "D5 · Lower+Core": ["Peso muerto rumano/convencional","Puente glúteo isom. (seg)","Wall sit (seg)","Patada de glúteo máquina","Pantorrilla sostenida (seg)","Crunch polea/máquina","Plancha (seg)"]
+  };
+
+  var STORE_KEY = "rutina_hipertrofia_log_v1";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch(e){ saved = {}; }
+
+  function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+  function slug(s){ return s.replace(/[^a-z0-9]/gi,'').toLowerCase(); }
+
+  var container = document.getElementById('logContainer');
+  Object.keys(logData).forEach(function(dayLabel){
+    var parts = dayLabel.split(' · ');
+    var card = document.createElement('div');
+    card.className = 'log-day';
+    var rows = logData[dayLabel].map(function(ex){
+      var cells = '';
+      for(var w=1; w<=6; w++){
+        var key = slug(dayLabel)+'_'+slug(ex)+'_s'+w;
+        var val = saved[key] ? ' value="'+esc(saved[key])+'"' : '';
+        cells += '<td><input data-k="'+key+'" placeholder="—"'+val+'></td>';
+      }
+      return '<tr><td class="ex-col">'+ex+'</td>'+cells+'</tr>';
+    }).join('');
+    card.innerHTML =
+      '<div class="log-day-head" onclick="toggleLogDay(this)"><div class="log-badge">'+parts[0]+'</div><div class="log-name">'+parts[1]+'</div><div class="log-chevron">▼</div></div>'+
+      '<div class="log-body"><div><div class="log-scroll"><table class="log"><thead><tr><th class="ex-col">Ejercicio</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th></tr></thead><tbody>'+rows+'</tbody></table></div></div></div>';
+    container.appendChild(card);
+  });
+
+  // Colapsar todas las tarjetas de registro por defecto (excepto peso corporal)
+  document.querySelectorAll('.log-day').forEach(function(d){ if(d.id!=='bwCard') d.classList.add('collapsed'); });
+  function toggleLogDay(head){ head.closest('.log-day').classList.toggle('collapsed'); }
+  window.toggleLogDay = toggleLogDay;
+
+  // Restaurar valores de peso corporal guardados
+  document.querySelectorAll('input[data-k^="bw"]').forEach(function(inp){
+    if(saved[inp.dataset.k]) inp.value = saved[inp.dataset.k];
+  });
+
+  var flag = document.getElementById('savedFlag');
+  var flagTimer;
+  function saveAll(){
+    var store = {};
+    document.querySelectorAll('input[data-k]').forEach(function(inp){
+      if(inp.value.trim()) store[inp.dataset.k] = inp.value.trim();
+    });
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch(e){}
+    flag.classList.add('show');
+    clearTimeout(flagTimer);
+    flagTimer = setTimeout(function(){ flag.classList.remove('show'); }, 1200);
+  }
+
+  document.addEventListener('input', function(e){
+    if(e.target.matches('input[data-k]')) saveAll();
+  });
+
+  function exportLog(){
+    var store = {};
+    document.querySelectorAll('input[data-k]').forEach(function(inp){
+      if(inp.value.trim()) store[inp.dataset.k] = inp.value.trim();
+    });
+
+    // Construir texto legible
+    var lines = [];
+    lines.push('RUTINA HIPERTROFIA · REGISTRO DE PROGRESO');
+    var d = new Date();
+    lines.push('Exportado: ' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString());
+    lines.push('==========================================');
+    lines.push('');
+
+    // Peso corporal
+    var bwRow = [];
+    for(var w=1; w<=6; w++){ bwRow.push('S'+w+': '+(store['bw'+w]||'—')); }
+    lines.push('PESO CORPORAL (kg)');
+    lines.push('  ' + bwRow.join('   '));
+    lines.push('');
+
+    // Cada día
+    Object.keys(logData).forEach(function(dayLabel){
+      lines.push(dayLabel.replace(' · ',' — ').toUpperCase());
+      logData[dayLabel].forEach(function(ex){
+        var cells = [];
+        for(var w=1; w<=6; w++){
+          var key = slug(dayLabel)+'_'+slug(ex)+'_s'+w;
+          cells.push('S'+w+':'+(store[key]||'—'));
+        }
+        lines.push('  ' + ex);
+        lines.push('    ' + cells.join('  '));
+      });
+      lines.push('');
+    });
+
+    var text = lines.join('\n');
+    var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'registro-rutina-' + d.getFullYear() + (d.getMonth()+1<10?'0':'') + (d.getMonth()+1) + (d.getDate()<10?'0':'') + d.getDate() + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+
+    flag.textContent = '✓ Respaldo descargado';
+    flag.classList.add('show');
+    setTimeout(function(){ flag.classList.remove('show'); flag.textContent='✓ Guardado'; }, 1800);
+  }
+  window.exportLog = exportLog;
+
+  function clearLog(){
+    if(!confirm('¿Borrar todo el registro? Esta acción no se puede deshacer.')) return;
+    document.querySelectorAll('input[data-k]').forEach(function(inp){ inp.value=''; });
+    try { localStorage.removeItem(STORE_KEY); } catch(e){}
+    flag.textContent = '✓ Borrado';
+    flag.classList.add('show');
+    setTimeout(function(){ flag.classList.remove('show'); flag.textContent='✓ Guardado'; }, 1200);
+  }
+  window.clearLog = clearLog;
+</script>
+</body>
+</html>
